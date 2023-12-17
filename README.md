@@ -1,5 +1,5 @@
-# ArgPrograma_4.0
-## Proyecto To-Do List
+# To-Do List
+## Organizadora de listas
 
 [![To-Do-List.png](https://i.postimg.cc/K8gQgdRH/To-Do-List.png)](https://i.postimg.cc/K8gQgdRH/To-Do-List.png)
 
@@ -13,8 +13,8 @@
 
 Integrantes:
 
-| Nombre  | Apellido |
+| Nombre  | Apellido |R
 | ------------- | ------------- |
 | Juan Pablo        | Cortez Fernandez  |
 | Ezequiel Anthony  | Melo              |
-| Victor Leonardo   | Spadoni Santander |
+

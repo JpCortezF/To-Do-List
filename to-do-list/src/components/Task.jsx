@@ -34,7 +34,11 @@ function Task({darkMode}) {
     setLists((currentLists) => [...currentLists]);
   };
 
-
+  const handleTaskEdit = (taskId, editedTaskName) => {
+    // Lógica para manejar la edición de tareas
+    console.log(`Editar tarea ${taskId} con nuevo nombre: ${editedTaskName}`);
+  };
+  
   const handleTaskCompleted = (listIndex, taskId) => {
     setLists((currentLists) =>
       currentLists.map((list, index) =>
@@ -87,6 +91,7 @@ function Task({darkMode}) {
                 tasks={list.tasks}
                 onTaskCompleted={(taskId) => handleTaskCompleted(index, taskId)}
                 onTaskDeleted={(taskId) => handleTaskDeleted(index, taskId)}
+                onTaskEdit={handleTaskEdit}
                 darkMode={darkMode}
               />
               {list.showForm && (

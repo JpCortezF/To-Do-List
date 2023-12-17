@@ -2,12 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const ListName = ({ tittle, onTittleChange, darkMode, style }) => {
   const [editing, setEditing] = useState(false);
-  const [editedTittle, setTittleEditado] = useState(tittle || 'Título de la lista');
   const titleRef = useRef(null);
 
   useEffect(() => {
     if (editing && titleRef.current) {
-      // Seleccionar automáticamente el texto completo al entrar en modo de edición
       const range = document.createRange();
       range.selectNodeContents(titleRef.current);
       const selection = window.getSelection();
@@ -22,18 +20,23 @@ const ListName = ({ tittle, onTittleChange, darkMode, style }) => {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Evitar el salto de línea por defecto
+      event.preventDefault();
       handleTittleBlur();
     }
   };
 
   const handleTittleBlur = () => {
-    if (editedTittle.trim() === '') {
-      setTittleEditado('Título de la lista');
-    }
     setEditing(false);
-    onTittleChange(editedTittle);
-    
+    const trimmedTittle = titleRef.current.textContent.trim();
+
+    if (trimmedTittle !== '') {
+      onTittleChange(trimmedTittle);
+    } else {
+      setEditing(false);
+      // Restablecer el título anterior solo si no está en blanco
+      titleRef.current.textContent = tittle;
+    }
+
     if (titleRef.current) {
       titleRef.current.blur();
     }
@@ -46,6 +49,7 @@ const ListName = ({ tittle, onTittleChange, darkMode, style }) => {
       contentEditable
       onBlur={handleTittleBlur}
       onKeyDown={handleKeyDown}
+      spellCheck={false} // Desactivar verificación ortográfica
       style={{
         outline: 'none',
         cursor: 'text',
@@ -56,8 +60,9 @@ const ListName = ({ tittle, onTittleChange, darkMode, style }) => {
         padding: editing ? '5px' : '0',
         ...style,
       }}
-      dangerouslySetInnerHTML={{ __html: editing ? editedTittle : tittle }}
-    />
+    >
+      {tittle}
+    </h3>
   );
 };
 
